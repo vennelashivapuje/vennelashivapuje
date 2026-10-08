@@ -1,0 +1,1088 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fff7f8;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #b76e79, #8e4350);
+            color: white;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header p {
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .card .number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #a65361;
+            margin-top: 10px;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            color: #8e4350;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #b76e79;
+        }
+
+        button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #a65361;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #8e4350;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            padding: 7px 12px;
+        }
+
+        .delete-btn:hover {
+            background: #b02a37;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 13px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #fff0f2;
+            color: #8e4350;
+        }
+
+        /* Status */
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .declined {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Progress */
+        .progress-container {
+            background: #eee;
+            height: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #b76e79;
+            width: 0%;
+            transition: 0.3s;
+        }
+
+        /* Tasks */
+        .task {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task input {
+            width: auto;
+        }
+
+        .task.completed span {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        /* Budget */
+        .budget-summary {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .budget-box {
+            flex: 1;
+            min-width: 180px;
+            background: #fff7f8;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .budget-box h4 {
+            color: #777;
+        }
+
+        .budget-box p {
+            font-size: 23px;
+            font-weight: bold;
+            margin-top: 5px;
+            color: #8e4350;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #8e4350;
+            color: white;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>💍 Wedding Planner</h1>
+        <p>Plan your perfect wedding in one place</p>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+
+        <div class="card">
+            <h3>Total Guests</h3>
+            <div class="number" id="guestCount">0</div>
+        </div>
+
+        <div class="card">
+            <h3>Confirmed Guests</h3>
+            <div class="number" id="confirmedCount">0</div>
+        </div>
+
+        <div class="card">
+            <h3>Total Budget</h3>
+            <div class="number" id="totalBudget">₹0</div>
+        </div>
+
+        <div class="card">
+            <h3>Tasks Completed</h3>
+            <div class="number" id="completedTasks">0%</div>
+        </div>
+
+    </div>
+
+
+    <!-- Wedding Details -->
+    <div class="section">
+
+        <div class="section-title">
+            <h2>💒 Wedding Details</h2>
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+                <label>Couple Name</label>
+                <input type="text" id="coupleName"
+                       placeholder="e.g. Rahul & Priya">
+            </div>
+
+            <div>
+                <label>Wedding Date</label>
+                <input type="date" id="weddingDate">
+            </div>
+
+            <div>
+                <label>Venue</label>
+                <input type="text" id="venue"
+                       placeholder="Wedding venue">
+            </div>
+
+        </div>
+
+        <br>
+
+        <button onclick="saveWeddingDetails()">
+            Save Details
+        </button>
+
+        <p id="detailsMessage" style="margin-top:10px;color:green;"></p>
+
+    </div>
+
+
+    <!-- Guest List -->
+    <div class="section">
+
+        <div class="section-title">
+            <h2>👥 Guest List</h2>
+        </div>
+
+        <div class="form-grid">
+
+            <input type="text"
+                   id="guestName"
+                   placeholder="Guest Name">
+
+            <input type="text"
+                   id="guestPhone"
+                   placeholder="Phone Number">
+
+            <select id="guestStatus">
+                <option value="Confirmed">Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Declined">Declined</option>
+            </select>
+
+        </div>
+
+        <br>
+
+        <button onclick="addGuest()">+ Add Guest</button>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>RSVP</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="guestTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- Budget -->
+    <div class="section">
+
+        <div class="section-title">
+            <h2>💰 Wedding Budget</h2>
+        </div>
+
+        <div class="budget-summary">
+
+            <div class="budget-box">
+                <h4>Total Budget</h4>
+                <p id="budgetTotal">₹0</p>
+            </div>
+
+            <div class="budget-box">
+                <h4>Amount Spent</h4>
+                <p id="budgetSpent">₹0</p>
+            </div>
+
+            <div class="budget-box">
+                <h4>Remaining</h4>
+                <p id="budgetRemaining">₹0</p>
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <input type="text"
+                   id="budgetCategory"
+                   placeholder="Category e.g. Catering">
+
+            <input type="number"
+                   id="budgetAmount"
+                   placeholder="Amount">
+
+            <select id="budgetPaid">
+                <option value="No">Not Paid</option>
+                <option value="Yes">Paid</option>
+            </select>
+
+        </div>
+
+        <br>
+
+        <button onclick="addBudget()">+ Add Expense</button>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Payment</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="budgetTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- Vendors -->
+    <div class="section">
+
+        <div class="section-title">
+            <h2>🏪 Vendor Bookings</h2>
+        </div>
+
+        <div class="form-grid">
+
+            <input type="text"
+                   id="vendorName"
+                   placeholder="Vendor Name">
+
+            <input type="text"
+                   id="vendorType"
+                   placeholder="Service e.g. Photographer">
+
+            <select id="vendorStatus">
+                <option value="Booked">Booked</option>
+                <option value="Pending">Pending</option>
+            </select>
+
+        </div>
+
+        <br>
+
+        <button onclick="addVendor()">+ Add Vendor</button>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Vendor</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="vendorTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- Tasks -->
+    <div class="section">
+
+        <div class="section-title">
+            <h2>✅ Wedding Checklist</h2>
+        </div>
+
+        <div class="form-grid">
+
+            <input type="text"
+                   id="taskInput"
+                   placeholder="Enter wedding task">
+
+            <input type="date"
+                   id="taskDate">
+
+            <button onclick="addTask()">+ Add Task</button>
+
+        </div>
+
+        <br>
+
+        <div id="taskList"></div>
+
+        <br>
+
+        <strong>Overall Progress</strong>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    <p>💍 Wedding Planner | Plan • Organize • Celebrate</p>
+</footer>
+
+
+<script>
+
+    /* =========================
+       DATA
+    ========================= */
+
+    let guests =
+        JSON.parse(localStorage.getItem("guests")) || [];
+
+    let budgets =
+        JSON.parse(localStorage.getItem("budgets")) || [];
+
+    let vendors =
+        JSON.parse(localStorage.getItem("vendors")) || [];
+
+    let tasks =
+        JSON.parse(localStorage.getItem("tasks")) || [];
+
+
+    /* =========================
+       WEDDING DETAILS
+    ========================= */
+
+    function saveWeddingDetails() {
+
+        const details = {
+            couple: document.getElementById("coupleName").value,
+            date: document.getElementById("weddingDate").value,
+            venue: document.getElementById("venue").value
+        };
+
+        localStorage.setItem(
+            "weddingDetails",
+            JSON.stringify(details)
+        );
+
+        document.getElementById("detailsMessage")
+            .innerText = "Wedding details saved successfully! ❤️";
+    }
+
+
+    function loadWeddingDetails() {
+
+        const details =
+            JSON.parse(localStorage.getItem("weddingDetails"));
+
+        if (!details) return;
+
+        document.getElementById("coupleName").value =
+            details.couple || "";
+
+        document.getElementById("weddingDate").value =
+            details.date || "";
+
+        document.getElementById("venue").value =
+            details.venue || "";
+    }
+
+
+    /* =========================
+       GUESTS
+    ========================= */
+
+    function addGuest() {
+
+        const name =
+            document.getElementById("guestName").value;
+
+        const phone =
+            document.getElementById("guestPhone").value;
+
+        const status =
+            document.getElementById("guestStatus").value;
+
+        if (!name) {
+            alert("Please enter guest name.");
+            return;
+        }
+
+        guests.push({
+            name,
+            phone,
+            status
+        });
+
+        saveData();
+
+        document.getElementById("guestName").value = "";
+        document.getElementById("guestPhone").value = "";
+
+        displayGuests();
+    }
+
+
+    function displayGuests() {
+
+        const table =
+            document.getElementById("guestTable");
+
+        table.innerHTML = "";
+
+        guests.forEach((guest, index) => {
+
+            let statusClass =
+                guest.status.toLowerCase();
+
+            table.innerHTML += `
+                <tr>
+                    <td>${guest.name}</td>
+                    <td>${guest.phone}</td>
+                    <td>
+                        <span class="status ${statusClass}">
+                            ${guest.status}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="delete-btn"
+                                onclick="deleteGuest(${index})">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        updateDashboard();
+    }
+
+
+    function deleteGuest(index) {
+
+        guests.splice(index, 1);
+
+        saveData();
+
+        displayGuests();
+    }
+
+
+    /* =========================
+       BUDGET
+    ========================= */
+
+    function addBudget() {
+
+        const category =
+            document.getElementById("budgetCategory").value;
+
+        const amount =
+            Number(document.getElementById("budgetAmount").value);
+
+        const paid =
+            document.getElementById("budgetPaid").value;
+
+        if (!category || !amount) {
+            alert("Please enter category and amount.");
+            return;
+        }
+
+        budgets.push({
+            category,
+            amount,
+            paid
+        });
+
+        saveData();
+
+        document.getElementById("budgetCategory").value = "";
+        document.getElementById("budgetAmount").value = "";
+
+        displayBudgets();
+    }
+
+
+    function displayBudgets() {
+
+        const table =
+            document.getElementById("budgetTable");
+
+        table.innerHTML = "";
+
+        budgets.forEach((item, index) => {
+
+            table.innerHTML += `
+                <tr>
+                    <td>${item.category}</td>
+                    <td>₹${item.amount.toLocaleString()}</td>
+                    <td>${item.paid}</td>
+                    <td>
+                        <button class="delete-btn"
+                                onclick="deleteBudget(${index})">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        updateBudget();
+    }
+
+
+    function deleteBudget(index) {
+
+        budgets.splice(index, 1);
+
+        saveData();
+
+        displayBudgets();
+    }
+
+
+    function updateBudget() {
+
+        let total = 0;
+        let spent = 0;
+
+        budgets.forEach(item => {
+
+            total += item.amount;
+
+            if (item.paid === "Yes") {
+                spent += item.amount;
+            }
+
+        });
+
+        const remaining = total - spent;
+
+        document.getElementById("budgetTotal")
+            .innerText = "₹" + total.toLocaleString();
+
+        document.getElementById("budgetSpent")
+            .innerText = "₹" + spent.toLocaleString();
+
+        document.getElementById("budgetRemaining")
+            .innerText = "₹" + remaining.toLocaleString();
+
+        document.getElementById("totalBudget")
+            .innerText = "₹" + total.toLocaleString();
+    }
+
+
+    /* =========================
+       VENDORS
+    ========================= */
+
+    function addVendor() {
+
+        const name =
+            document.getElementById("vendorName").value;
+
+        const type =
+            document.getElementById("vendorType").value;
+
+        const status =
+            document.getElementById("vendorStatus").value;
+
+        if (!name || !type) {
+            alert("Please enter vendor details.");
+            return;
+        }
+
+        vendors.push({
+            name,
+            type,
+            status
+        });
+
+        saveData();
+
+        document.getElementById("vendorName").value = "";
+        document.getElementById("vendorType").value = "";
+
+        displayVendors();
+    }
+
+
+    function displayVendors() {
+
+        const table =
+            document.getElementById("vendorTable");
+
+        table.innerHTML = "";
+
+        vendors.forEach((vendor, index) => {
+
+            const statusClass =
+                vendor.status === "Booked"
+                ? "confirmed"
+                : "pending";
+
+            table.innerHTML += `
+                <tr>
+                    <td>${vendor.name}</td>
+                    <td>${vendor.type}</td>
+                    <td>
+                        <span class="status ${statusClass}">
+                            ${vendor.status}
+                        </span>
+                    </td>
+                    <td>
+                        <button class="delete-btn"
+                                onclick="deleteVendor(${index})">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+
+    function deleteVendor(index) {
+
+        vendors.splice(index, 1);
+
+        saveData();
+
+        displayVendors();
+    }
+
+
+    /* =========================
+       TASKS
+    ========================= */
+
+    function addTask() {
+
+        const task =
+            document.getElementById("taskInput").value;
+
+        const date =
+            document.getElementById("taskDate").value;
+
+        if (!task) {
+            alert("Please enter a task.");
+            return;
+        }
+
+        tasks.push({
+            task,
+            date,
+            completed: false
+        });
+
+        saveData();
+
+        document.getElementById("taskInput").value = "";
+        document.getElementById("taskDate").value = "";
+
+        displayTasks();
+    }
+
+
+    function displayTasks() {
+
+        const list =
+            document.getElementById("taskList");
+
+        list.innerHTML = "";
+
+        tasks.forEach((item, index) => {
+
+            list.innerHTML += `
+                <div class="task ${item.completed ? "completed" : ""}">
+
+                    <input type="checkbox"
+                           ${item.completed ? "checked" : ""}
+                           onchange="toggleTask(${index})">
+
+                    <span>
+                        ${item.task}
+                        ${item.date ? " - " + item.date : ""}
+                    </span>
+
+                    <button class="delete-btn"
+                            onclick="deleteTask(${index})">
+                        Delete
+                    </button>
+
+                </div>
+            `;
+        });
+
+        updateTaskProgress();
+    }
+
+
+    function toggleTask(index) {
+
+        tasks[index].completed =
+            !tasks[index].completed;
+
+        saveData();
+
+        displayTasks();
+    }
+
+
+    function deleteTask(index) {
+
+        tasks.splice(index, 1);
+
+        saveData();
+
+        displayTasks();
+    }
+
+
+    function updateTaskProgress() {
+
+        if (tasks.length === 0) {
+
+            document.getElementById("progressBar").style.width =
+                "0%";
+
+            document.getElementById("completedTasks")
+                .innerText = "0%";
+
+            return;
+        }
+
+        const completed =
+            tasks.filter(task => task.completed).length;
+
+        const percentage =
+            Math.round((completed / tasks.length) * 100);
+
+        document.getElementById("progressBar")
+            .style.width = percentage + "%";
+
+        document.getElementById("completedTasks")
+            .innerText = percentage + "%";
+    }
+
+
+    /* =========================
+       DASHBOARD
+    ========================= */
+
+    function updateDashboard() {
+
+        document.getElementById("guestCount")
+            .innerText = guests.length;
+
+        const confirmed =
+            guests.filter(
+                guest => guest.status === "Confirmed"
+            ).length;
+
+        document.getElementById("confirmedCount")
+            .innerText = confirmed;
+    }
+
+
+    /* =========================
+       SAVE DATA
+    ========================= */
+
+    function saveData() {
+
+        localStorage.setItem(
+            "guests",
+            JSON.stringify(guests)
+        );
+
+        localStorage.setItem(
+            "budgets",
+            JSON.stringify(budgets)
+        );
+
+        localStorage.setItem(
+            "vendors",
+            JSON.stringify(vendors)
+        );
+
+        localStorage.setItem(
+            "tasks",
+            JSON.stringify(tasks)
+        );
+    }
+
+
+    /* =========================
+       INITIAL LOAD
+    ========================= */
+
+    function initializeApp() {
+
+        loadWeddingDetails();
+
+        displayGuests();
+
+        displayBudgets();
+
+        displayVendors();
+
+        displayTasks();
+
+        updateDashboard();
+
+        updateBudget();
+
+    }
+
+    initializeApp();
+
+</script>
+
+</body>
+</html>
+
